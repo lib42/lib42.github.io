@@ -1,0 +1,973 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>BorgServer - Docker image - Lib[re]42</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#borgserver-docker-image" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Lib[re]42" class="md-header__button md-logo" aria-label="Lib[re]42" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lib[re]42
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BorgServer - Docker image
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/lib42/lib42.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Lib[re]42" class="md-nav__button md-logo" aria-label="Lib[re]42" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Lib[re]42
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lib42/lib42.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      <label class="md-nav__link" for="__nav_1">
+        Projects
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Projects" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projects
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1">
+        Incubating
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Incubating" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Incubating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incubating/charts/" class="md-nav__link">
+        Helm Charts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incubating/heqet/" class="md-nav__link">
+        Heqet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        Stable
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Stable" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Stable
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          BorgServer - Docker image
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        BorgServer - Docker image
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-example" class="md-nav__link">
+    Quick Example
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-persistent-sshkey-storage" class="md-nav__link">
+    Create persistent sshkey storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-copy-every-clients-ssh-publickey-into-persistent-storage" class="md-nav__link">
+    (Generate &amp;) Copy every client's ssh publickey into persistent storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#borgserver-configuration" class="md-nav__link">
+    Borgserver Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Borgserver Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#borg_serve_args" class="md-nav__link">
+    BORG_SERVE_ARGS
+  </a>
+  
+    <nav class="md-nav" aria-label="BORG_SERVE_ARGS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#borg_append_only" class="md-nav__link">
+    BORG_APPEND_ONLY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#borg_admin" class="md-nav__link">
+    BORG_ADMIN
+  </a>
+  
+    <nav class="md-nav" aria-label="BORG_ADMIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puid" class="md-nav__link">
+    PUID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgid" class="md-nav__link">
+    PGID
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistent-storages-client-configuration" class="md-nav__link">
+    Persistent Storages &amp; Client Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Persistent Storages &amp; Client Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshkeys" class="md-nav__link">
+    /sshkeys
+  </a>
+  
+    <nav class="md-nav" aria-label="/sshkeys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshkeysclients" class="md-nav__link">
+    /sshkeys/clients/
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshkeyshost" class="md-nav__link">
+    /sshkeys/host/
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    /backup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-setup" class="md-nav__link">
+    Example Setup
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshconfig-for-clients" class="md-nav__link">
+    ~/.ssh/config for clients
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-url" class="md-nav__link">
+    Project URL
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-example" class="md-nav__link">
+    Quick Example
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-persistent-sshkey-storage" class="md-nav__link">
+    Create persistent sshkey storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-copy-every-clients-ssh-publickey-into-persistent-storage" class="md-nav__link">
+    (Generate &amp;) Copy every client's ssh publickey into persistent storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#borgserver-configuration" class="md-nav__link">
+    Borgserver Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Borgserver Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#borg_serve_args" class="md-nav__link">
+    BORG_SERVE_ARGS
+  </a>
+  
+    <nav class="md-nav" aria-label="BORG_SERVE_ARGS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#borg_append_only" class="md-nav__link">
+    BORG_APPEND_ONLY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#borg_admin" class="md-nav__link">
+    BORG_ADMIN
+  </a>
+  
+    <nav class="md-nav" aria-label="BORG_ADMIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puid" class="md-nav__link">
+    PUID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgid" class="md-nav__link">
+    PGID
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistent-storages-client-configuration" class="md-nav__link">
+    Persistent Storages &amp; Client Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Persistent Storages &amp; Client Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshkeys" class="md-nav__link">
+    /sshkeys
+  </a>
+  
+    <nav class="md-nav" aria-label="/sshkeys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshkeysclients" class="md-nav__link">
+    /sshkeys/clients/
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshkeyshost" class="md-nav__link">
+    /sshkeys/host/
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    /backup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-setup" class="md-nav__link">
+    Example Setup
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshconfig-for-clients" class="md-nav__link">
+    ~/.ssh/config for clients
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-url" class="md-nav__link">
+    Project URL
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lib42/lib42.github.io/edit/master/docs/projects/stable/docker-borgserver.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="borgserver-docker-image">BorgServer - Docker image<a class="headerlink" href="#borgserver-docker-image" title="Permanent link">&para;</a></h1>
+<p>Debian based container image, running openssh-daemon only accessable by user named "borg" using SSH-Publickey Auth &amp; "borgbackup" as client. Backup-Repositoriees, client's SSH-Keys &amp; SSHd's Hostkeys will be stored in persistent storage.
+For every ssh-key added, a own borg-repository will be created.</p>
+<p><strong>NOTE: I will assume that you know, what a ssh-key is and how to generate &amp; use it. If not, you might want to start here: <a href="https://wiki.archlinux.org/index.php/SSH_Keys">Arch Wiki</a></strong></p>
+<h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
+<p>Here is a quick example how to configure &amp; run this image:</p>
+<h3 id="create-persistent-sshkey-storage">Create persistent sshkey storage<a class="headerlink" href="#create-persistent-sshkey-storage" title="Permanent link">&para;</a></h3>
+<pre><code> $ mkdir -p borg/sshkeys/clients
+</code></pre>
+<p>Make sure that the permissions are right on the sshkey folder:</p>
+<pre><code> $ chown 1000:1000 borg/sshkeys
+</code></pre>
+<h3 id="generate-copy-every-clients-ssh-publickey-into-persistent-storage">(Generate &amp;) Copy every client's ssh publickey into persistent storage<a class="headerlink" href="#generate-copy-every-clients-ssh-publickey-into-persistent-storage" title="Permanent link">&para;</a></h3>
+<p><em>Remember</em>: Filename = Borg-repository name!</p>
+<pre><code> $ cp ~/.ssh/my_machine.pub borg/sshkeys/clients/my_machine
+</code></pre>
+<p>The OpenSSH-Deamon will expose on port 22/tcp - so you will most likely want to redirect it to a different port. Like in this example:</p>
+<pre><code>docker run -td \
+    -p 2222:22  \
+    --volume ./borg/sshkeys:/sshkeys \
+    --volume ./borg/backup:/backup \
+    nold360/borgserver:latest
+</code></pre>
+<h2 id="borgserver-configuration">Borgserver Configuration<a class="headerlink" href="#borgserver-configuration" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Place Borg-Clients SSH-PublicKeys in persistent storage</li>
+<li>Client backup-directories will be named by the filename found in /sshkeys/clients/</li>
+</ul>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
+<h4 id="borg_serve_args">BORG_SERVE_ARGS<a class="headerlink" href="#borg_serve_args" title="Permanent link">&para;</a></h4>
+<p>Use this variable if you want to set special options for the "borg serve"-command, which is used internally.</p>
+<p>See the the documentation for all available arguments: <a href="https://borgbackup.readthedocs.io/en/stable/usage.html#borg-serve">borgbackup.readthedocs.io</a></p>
+<h5 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h5>
+<pre><code>docker run --rm -e BORG_SERVE_ARGS=&quot;--progress --debug&quot; (...) nold360/borgserver
+</code></pre>
+<h4 id="borg_append_only">BORG_APPEND_ONLY<a class="headerlink" href="#borg_append_only" title="Permanent link">&para;</a></h4>
+<p>If you want your client to be only able to append &amp; not prune anything from their repo, set this variable to <strong>"yes"</strong>.</p>
+<h4 id="borg_admin">BORG_ADMIN<a class="headerlink" href="#borg_admin" title="Permanent link">&para;</a></h4>
+<p>When <em>BORG_APPEND_ONLY</em> is active, no client is able to prune it's repo. 
+Since you might want to cleanup the repos at some point, you can declare one client to be the borg "admin".</p>
+<p>This client will have <strong>full access to all repos of any client!</strong> So he's able to add/prune/... what ever he wants.</p>
+<p>To declare a client as admin, set this variable to the name of the client/sshkey you've added to the /sshkeys/clients directory.</p>
+<h5 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h5>
+<pre><code>docker run --rm -e BORG_APPEND_ONLY=&quot;yes&quot; -e BORG_ADMIN=&quot;nolds_notebook&quot; (...) nold360/borgserver
+</code></pre>
+<p>To prune repos from another client, you have to add the path to the repository in the clients directory:</p>
+<pre><code>borg prune --keep-last 100 --keep-weekly 1 (...) borgserver:/clientA/clientA
+</code></pre>
+<h4 id="puid">PUID<a class="headerlink" href="#puid" title="Permanent link">&para;</a></h4>
+<p>Used to set the user id of the <code>borg</code> user inside the container. This can be useful when the container has to access resources on the host with a specific user id.</p>
+<h4 id="pgid">PGID<a class="headerlink" href="#pgid" title="Permanent link">&para;</a></h4>
+<p>Used to set the group id of the <code>borg</code> group inside the container. This can be useful when the container has to access resources on the host with a specific group id.</p>
+<h3 id="persistent-storages-client-configuration">Persistent Storages &amp; Client Configuration<a class="headerlink" href="#persistent-storages-client-configuration" title="Permanent link">&para;</a></h3>
+<p>We will need two persistent storage directories for our borgserver to be usefull.</p>
+<h4 id="sshkeys">/sshkeys<a class="headerlink" href="#sshkeys" title="Permanent link">&para;</a></h4>
+<p>This directory has two subdirectories:</p>
+<h5 id="sshkeysclients">/sshkeys/clients/<a class="headerlink" href="#sshkeysclients" title="Permanent link">&para;</a></h5>
+<p>Here we will put all SSH public keys from our borg clients, we want to backup. Every key must be it's own file, containing only one line, with the key. The name of the file will become the name of the borg repository, we need for our client to connect.</p>
+<p>That means every client get's it's own repository. So you might want to use the hostname of the client as the name of the sshkey file.</p>
+<p>Hidden files &amp; files inside of hidden directories will be ignored!</p>
+<pre><code>e.g. /sshkeys/clients/webserver.mydomain.com
+</code></pre>
+<p>Than your client would have to initiat the borg repository like this:</p>
+<pre><code>webserver.mydomain.com ~$ borg init ssh://borg@borgserver-container/backup/webserver.mydomain.com/my_first_repo
+</code></pre>
+<p><strong>!IMPORTANT!</strong>: The container wouldn't start the SSH-Deamon until there is at least one ssh-keyfile in this directory!</p>
+<h5 id="sshkeyshost">/sshkeys/host/<a class="headerlink" href="#sshkeyshost" title="Permanent link">&para;</a></h5>
+<p>This directory will be automaticly created on first start. Also run.sh will copy the SSH-Hostkeys here, so your clients can verify it's borgservers ssh-hostkey.</p>
+<h4 id="backup">/backup<a class="headerlink" href="#backup" title="Permanent link">&para;</a></h4>
+<p>In this directory will borg write all the client data to. It's best to start with an empty directory.</p>
+<h2 id="example-setup">Example Setup<a class="headerlink" href="#example-setup" title="Permanent link">&para;</a></h2>
+<h3 id="docker-composeyml">docker-compose.yml<a class="headerlink" href="#docker-composeyml" title="Permanent link">&para;</a></h3>
+<p>Here is a quick example, how to run borgserver using docker-compose:</p>
+<pre><code>services:
+ borgserver:
+  image: nold360/borgserver
+  volumes:
+   - /backup:/backup
+   - ./sshkeys:/sshkeys
+  ports:
+   - &quot;2222:22&quot;
+  environment:
+   BORG_SERVE_ARGS: &quot;&quot;
+   BORG_APPEND_ONLY: &quot;no&quot;
+   BORG_ADMIN: &quot;&quot;
+   PUID: 1000
+   PGID: 1000
+</code></pre>
+<h3 id="sshconfig-for-clients">~/.ssh/config for clients<a class="headerlink" href="#sshconfig-for-clients" title="Permanent link">&para;</a></h3>
+<p>With this configuration (on your borg client) you can easily connect to your borgserver.</p>
+<pre><code>Host backup
+    Hostname my.docker.host
+    Port 2222
+    User borg
+</code></pre>
+<p>Now initiate a borg-repository like this:</p>
+<pre><code> $ borg init backup:my_first_borg_repo
+</code></pre>
+<p>And create your first backup!</p>
+<pre><code> $ borg create backup:my_first_borg_repo::documents-2017-11-01 /home/user/MyImportentDocs
+</code></pre>
+<h2 id="project-url">Project URL<a class="headerlink" href="#project-url" title="Permanent link">&para;</a></h2>
+<p>https://github.com/nold360/docker-borgserver</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../incubating/heqet/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Heqet
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>
