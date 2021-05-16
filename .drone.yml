@@ -1,28 +1,28 @@
+---
 kind: pipeline
 type: kubernetes
-name: default
+name: build-page
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
- - name: build-docs
-   image: squidfunk/mkdocs-material
-   environment:
-     GH_TOKEN:
-       from_secret: gh_token
+- name: build
+  image: squidfunk/mkdocs-material
+  commands:
+  - git remote add gh-token "https://$${GH_TOKEN}@github.com/lib42/lib42.github.io"
+  - git fetch gh-token && git checkout gh-token/docs
+  - wget -O docs/projects/incubating/heqet.md -nv https://raw.githubusercontent.com/nold360/heqet/master/README.md
+  - "echo -e '\n## Project URL\n\nhttps://github.com/nold360/heqet' >> docs/projects/incubating/heqet.md"
+  - wget -O docs/projects/incubating/charts.md -nv https://raw.githubusercontent.com/lib42/charts/master/README.md
+  - "echo -e '\n## Project URL\n\nhttps://github.com/lib42/charts' >> docs/projects/incubating/charts.md"
+  - wget -O docs/projects/stable/docker-borgserver.md -nv https://raw.githubusercontent.com/nold360/docker-borgserver/master/README.md
+  - "echo -e '\n## Project URL\n\nhttps://github.com/nold360/docker-borgserver' >> docs/projects/stable/docker-borgserver.md"
+  - cp README.md docs/index.md
+  - mkdocs gh-deploy --remote-name gh-token --remote-branch main
+  environment:
+    GH_TOKEN:
+      from_secret: gh_token
 
-     incubating: "nold360/heqet lib42/charts"
-     stable: "lib42/docker-borgserver"
-   commands:
-     - >
-       for var in incubating stable ; do
-         for project in ${!var}; do
-           URL="https://raw.githubusercontent.com/${project}/master/README.md"
-           out="projects/${var}/$(echo $project | cut -f2 -d/).md"
-           wget -O "$out" -nv "$URL"
-
-           echo -e "\n## Project Repository\n" >> "$out"
-           echo "https://github.com/${project}" >> "$out"
-         done
-       done
-     - git remote add gh-token "https://$${GH_TOKEN}@github.com/lib42/lib42.github.io"
-     - git fetch gh-token && git fetch gh-token gh-deploy:gh-deploy
-     - mkdocs gh-deploy --clean --remote-name gh-token --remote-branch main;
+...
