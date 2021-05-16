@@ -1,0 +1,28 @@
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+ - name: build-docs
+   image: squidfunk/mkdocs-material
+   environment:
+     GH_TOKEN:
+       from_secret: gh_token
+
+     incubating: "nold360/heqet lib42/charts"
+     stable: "lib42/docker-borgserver"
+   commands:
+     - >
+       for var in incubating stable ; do
+         for project in ${!var}; do
+           URL="https://raw.githubusercontent.com/${project}/master/README.md"
+           out="projects/${var}/$(echo $project | cut -f2 -d/).md"
+           wget -O "$out" -nv "$URL"
+
+           echo -e "\n## Project Repository\n" >> "$out"
+           echo "https://github.com/${project}" >> "$out"
+         done
+       done
+     - git remote add gh-token "https://$${GH_TOKEN}@github.com/lib42/lib42.github.io"
+     - git fetch gh-token && git fetch gh-token gh-deploy:gh-deploy
+     - mkdocs gh-deploy --clean --remote-name gh-token --remote-branch main;

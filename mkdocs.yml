@@ -1,0 +1,24 @@
+site_name: Lib[re]42
+repo_url: https://github.com/lib42/lib42.github.io
+remote_branch: gh-deploy
+theme:
+  features:
+    - navigation.top
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+markdown_extensions:
+  - toc:
+      permalink: true
