@@ -9,7 +9,7 @@ def main(ctx):
     for project in data[state]:
       name=project.split('/')[1]
       cmd.append("wget -O docs/projects/%s/%s.md -nv https://raw.githubusercontent.com/%s/master/README.md" % (state, name, project))
-      cmd.append("echo -e '\n## Project URL\n\nhttps://github.com/%s' >> docs/projects/%s/%s.md" % (project, state, name))
+      cmd.append("echo -e '\n## Project URL\n\n[Github / %s](https://github.com/%s)' >> docs/projects/%s/%s.md" % (project, project, state, name))
   cmd.append('cp README.md docs/index.md')
   cmd.append('mkdocs gh-deploy --remote-name gh-token --remote-branch main')
 
