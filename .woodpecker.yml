@@ -14,4 +14,4 @@ pipeline:
     secrets:
       - github_deploy_key
     when:
-      branch: docs
+      branch: main
