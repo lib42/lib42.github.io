@@ -1,0 +1,17 @@
+pipeline:
+  docs:
+    image: squidfunk/mkdocs-material
+    commands:
+    - mkdir -p $$HOME/.ssh
+    - ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
+    - echo "$${GITHUB_DEPLOY_KEY}" > "$HOME/.ssh/id_rsa"
+    - chmod 0600 $$HOME/.ssh/id_rsa
+
+    #- git checkout gh-token/docs
+    - cp README.md docs/index.md
+    - git remote set-url origin ssh://git@github.com/lib42/lib42.github.io.git
+    - mkdocs gh-deploy --remote-branch gh-deploy
+    secrets:
+      - github_deploy_key
+    when:
+      branch: docs
